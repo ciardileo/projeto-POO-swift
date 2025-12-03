@@ -166,18 +166,20 @@ class AulaColetiva: Aula {
         super.init(nome, instrutor)
     } 
 
-
-    public func inscrever(_ aluno: Aluno) -> Bool {
+    // COMENTÁRIO 2: mudamos o return para uma tupla com um success (boolean) e uma mensagem de erro, pois assim é possível identificar o erro de forma clara e ter uma mensagem específica
+    public func inscrever(_ aluno: Aluno) -> (success: Bool, msg: String) {
         // se ainda houver espaço na turma
         if (self.alunosInscritos.count >= self.capacidadeMaxima) {
             // se o aluno ainda não estiver inscrito
             if (!self.alunosInscritos.keys.contains(aluno.matricula)) {
                 self.alunosInscritos[aluno.matricula] = aluno
-                return true
+                return (success: true, msg: "Sucesso! Aluno \(aluno.nome) adicionado com sucesso!")
+            } else {
+                return (success: false, msg: "Erro! O aluno \(aluno.nome) já está inscrito!")
             }
+        } else {
+            return (success: false, msg: "Erro! Não há espaço suficiente na turma!")
         }
-
-        return false
     }
 
 
@@ -222,4 +224,34 @@ class Academia {
         return true
     }
 
+    // sobrecarga de métodos
+    public func matricularAluno(_ aluno: Aluno) -> (success: Bool, msg: String) {
+        if (!self.alunosInscritos.keys.contains(aluno.matricula)) {
+            self.alunosInscritos[aluno.matricula] = aluno
+            return (success: true, msg: "Sucesso! Aluno de matrícula \(aluno.matricula) matriculado na academia")
+        } else {
+            return (success: false, msg: "Erro! O aluno de matrícula \(aluno.matricula) já está matriculado na academia")
+        }
+    }
+
+
+    public func matricularAluno(nome: String, email: String, matricula: String, nivel: NivelAluno, plano: Plano) -> Aluno? {
+        let novoAluno = Aluno(nome, email, matricula, nivel, plano)
+        let respostaMatricula = matricularAluno(novoAluno)
+
+        if (respostaMatricula.success) {
+            return novoAluno
+        } else {
+            return nil
+        }
+    }
+
+
+    public func buscarAluno(porMatricula matricula: String) -> Aluno? {
+        if let aluno = self.alunosInscritos[matricula] {
+            return aluno
+        } else {
+            return nil
+        }
+    } 
 }

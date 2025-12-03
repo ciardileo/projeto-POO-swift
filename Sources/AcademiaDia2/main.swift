@@ -1,8 +1,8 @@
-// Academia - Dia 2
+// Academia Dia 2
 
-
-// código do dia 1
+// CÓDIGO DIA 1
 // modelagem de PESSOA
+
 enum NivelAluno: String {
     case iniciante
     case intermediario
@@ -59,7 +59,8 @@ class Instrutor: Pessoa {
 
 
 // modelagem de PLANO
-class Plano {  // deveria 
+
+class Plano {  // deveria ser uma classe abstrata
     public var nome: String
 
     init(_ nome: String) {
@@ -95,7 +96,8 @@ class PlanoAnual: Plano {
     }
 }
 
-// código do dia 2
+// CÓDIGO DIA 2
+
 protocol Manutencao {
     var nomeItem: String {get set}
     var dataUltimaManutencao: String {get}
@@ -162,18 +164,20 @@ class AulaColetiva: Aula {
         super.init(nome, instrutor)
     } 
 
-
-    public func inscrever(_ aluno: Aluno) -> Bool {
+    // COMENTÁRIO 2: mudamos o return para uma tupla com um status (boolean) e uma mensagem de erro, pois assim é possível identificar o erro de forma clara e ter uma mensagem específica
+    public func inscrever(_ aluno: Aluno) -> (status: Bool, msg: String) {
         // se ainda houver espaço na turma
         if (self.alunosInscritos.count >= self.capacidadeMaxima) {
             // se o aluno ainda não estiver inscrito
             if (!self.alunosInscritos.keys.contains(aluno.matricula)) {
                 self.alunosInscritos[aluno.matricula] = aluno
-                return true
+                return (status: true, msg: "Sucesso! Aluno \(aluno.nome) adicionado com sucesso!")
+            } else {
+                return (status: false, msg: "Erro! O aluno \(aluno.nome) já está inscrito!")
             }
+        } else {
+            return (status: false, msg: "Erro! Não há espaço suficiente na turma!")
         }
-
-        return false
     }
 
 

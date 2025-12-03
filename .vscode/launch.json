@@ -1,0 +1,64 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:projeto-POO-swift}",
+            "name": "Debug AcademiaDia2",
+            "target": "AcademiaDia2",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug AcademiaDia2"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:projeto-POO-swift}",
+            "name": "Release AcademiaDia2",
+            "target": "AcademiaDia2",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release AcademiaDia2"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:projeto-POO-swift}",
+            "name": "Debug AcademiaDia1",
+            "target": "AcademiaDia1",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug AcademiaDia1"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:projeto-POO-swift}",
+            "name": "Release AcademiaDia1",
+            "target": "AcademiaDia1",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release AcademiaDia1"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:projeto-POO-swift}",
+            "name": "Debug AcademiaDia3",
+            "target": "AcademiaDia3",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug AcademiaDia3"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:projeto-POO-swift}",
+            "name": "Release AcademiaDia3",
+            "target": "AcademiaDia3",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release AcademiaDia3"
+        }
+    ]
+}

@@ -12,6 +12,12 @@ let package = Package(
         .executableTarget(
             name: "AcademiaDia1"
         ),
+        .executableTarget(
+            name: "AcademiaDia2"
+        ),
+        .executableTarget(
+            name: "AcademiaDia3"
+        ),
     ]
 )
 

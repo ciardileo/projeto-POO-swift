@@ -193,14 +193,14 @@ class AulaColetiva: Aula {
 
 class Academia {
     private let nome: String 
-    private var alunosInscritos: [String: Aluno]
+    private var alunosMatriculados: [String: Aluno]
     private var instrutoresContratados: [String: Instrutor]
     private var aparelhos: [Aparelho]
     private var aulasDisponiveis: [Aula]
 
     init(nome: String) {
         self.nome = nome
-        self.alunosInscritos = [:]
+        self.alunosMatriculados = [:]
         self.instrutoresContratados = [:]
         self.aparelhos = []
         self.aulasDisponiveis = []
@@ -226,8 +226,8 @@ class Academia {
 
     // sobrecarga de métodos
     public func matricularAluno(_ aluno: Aluno) -> (success: Bool, msg: String) {
-        if (!self.alunosInscritos.keys.contains(aluno.matricula)) {
-            self.alunosInscritos[aluno.matricula] = aluno
+        if (!self.alunosMatriculados.keys.contains(aluno.matricula)) {
+            self.alunosMatriculados[aluno.matricula] = aluno
             return (success: true, msg: "Sucesso! Aluno de matrícula \(aluno.matricula) matriculado na academia")
         } else {
             return (success: false, msg: "Erro! O aluno de matrícula \(aluno.matricula) já está matriculado na academia")
@@ -248,10 +248,80 @@ class Academia {
 
 
     public func buscarAluno(porMatricula matricula: String) -> Aluno? {
-        if let aluno = self.alunosInscritos[matricula] {
+        if let aluno = self.alunosMatriculados[matricula] {
             return aluno
         } else {
             return nil
         }
     } 
+
+     public func listarAlunos() {
+        if (self.alunosMatriculados.isEmpty) {
+            print ("Não há alunos matriculados")
+        } else {
+            let alunosOrdenados = self.alunosMatriculados.values.sorted { $0.nome < $1.nome }
+            for aluno in alunosOrdenados {
+                print (aluno.getDescricao())
+                print ("")
+            }
+        }
+    }
+    
+     /* OUTRA FORMA ENCONTRADA DE REALIZAR A LISTAGEM DE ALUNOS
+    public func listarAlunos() {
+    print("=================================")
+    print("Data: 05/12/2025")
+    print("Academia: \(nome)")
+    print("=================================")
+        if alunosInscritos.isEmpty {
+            print("Erro: Nenhum aluno matriculado!")
+            return
+        }
+
+        print("--- Lista de Alunos Matriculados (A–Z) ---")
+
+        let alunosOrdenados = alunosInscritos.values.sorted {
+            $0.nome.lowercased() < $1.nome.lowercased()
+        }
+
+        for aluno in alunosOrdenados {
+            print(aluno.getDescricao())
+            print("----------/ Swift /----------")
+        }
+    }
+    */
+    
+    public func listarAulas() {
+        if (self.aulasDisponiveis.isEmpty) {
+            print ("Nenhuma aula disponivel no momento")
+        } else {
+            for aula in self.aulasDisponiveis {
+                print(aula.getDescricao())
+                print ("")
+            }
+        }
+    }
+   
+    
+    /* OUTRA FORMA PENSADA PARA A LISTAGEM DE AULAS
+     public func listarAulas() {
+    print("=================================")
+     print("Data: 05/12/2025")
+    print("Academia: \(nome)")
+    print("=================================")
+    if aulasDisponiveis.isEmpty {
+        print("Nenhuma aula cadastrada!")
+        return
+    }
+    
+    print("=== Aulas Disponíveis ===")
+    
+    for aula in aulasDisponiveis {
+        print(aula.getDescricao())
+            print("----------/ Swift /----------")
+    }
+}
+    
+    */
+    
 }

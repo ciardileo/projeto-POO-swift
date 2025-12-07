@@ -1,4 +1,4 @@
-// Academia Dia 3
+// Academia Dia 4
 
 // Códigos do Dia 1 e 2
 
@@ -383,3 +383,84 @@ print("Relatório da Academia:")
 print("Total de Alunos Matriculados: \(relatorio.totalAlunos)")
 print("Total de Instrutores Contratados: \(relatorio.totalInstrutores)")
 print("Total de Aulas Disponíveis: \(relatorio.totalAulas)")
+
+/* Também foi feito da seguinte forma:
+
+// Dia 4
+
+// adição de método à classe Academia, através de extension, como requerido pelo documento
+extension Academia {
+    func gerarRelatorio() -> (totalAlunos: Int, totalInstrutores: Int, totalAulas: Int) {
+        return (totalAlunos: self.alunosMatriculados.count, totalInstrutores: self.instrutoresContratados.count, totalAulas: self.aulasDisponiveis.count)
+    }
+}
+
+// Inicialização de objetos 
+
+let academiaTeste = Academia(nome: "Academia POO 360")
+
+let planoMensal = PlanoMensal()
+let planoAnual = PlanoAnual()
+
+let instrutorA = Instrutor("Instrutor A", "instrutorA@gmail.com", "musc.")
+let instrutorB = Instrutor("Instrutor B", "instrutorB@gmail.com", "musc.")
+
+_ = academiaTeste.contratarInstrutor(instrutorA)
+_ = academiaTeste.contratarInstrutor(instrutorB)
+
+var alunoA: Aluno?
+var alunoB: Aluno?
+
+// matricula de alunos
+if let aA = academiaTeste.matricularAluno(nome: "pedro", email: "pedrinho@gmail.com", matricula: "1", nivel: .iniciante , plano: planoMensal) {
+    alunoA = aA
+    print (" \(aA.nome) matriculado")
+}
+    
+if let aB = academiaTeste.matricularAluno(nome: "luis", email: "luisinho@gmail.com", matricula: "2", nivel: .iniciante , plano: planoAnual) {
+    alunoB = aB
+    print (" \(aB.nome) matriculado")
+}
+    
+// criacao e agendamento de aulas
+let aulaPer = AulaPersonal("treinão", instrutorA, alunoA!)
+let aulaCol = AulaColetiva("treininho", instrutorB, 3)
+
+_ = academiaTeste.adicionarAula(aulaPer)
+_ = academiaTeste.adicionarAula(aulaCol)
+
+// interações
+if let aA = alunoA { print(aulaCol.inscrever(aA).msg) }
+if let aB = alunoB { print(aulaCol.inscrever(aB).msg) }
+
+// ultimo aluno na aula 
+if let aC = academiaTeste.matricularAluno(nome: "lucas", email: "luquinha@gmail.com", matricula: "3", nivel: .iniciante , plano: planoMensal) {
+        print(aulaCol.inscrever(aC).msg) 
+}
+    
+// teste de limite
+if let aD = academiaTeste.matricularAluno(nome: "joão", email: "joãozinho@gmail.com", matricula: "4", nivel: .iniciante , plano: planoMensal) {
+        print(aulaCol.inscrever(aD).msg)
+}
+    
+// listagem
+academiaTeste.listarAulas()
+
+// polimorfismo com aulas
+let listaDeAulas: [Aula] = [aulaPer, aulaCol]
+for aula in listaDeAulas {
+    print(aula.getDescricao())
+}
+    
+// polimorfismo com alunos
+let listaDePessoas: [Pessoa] = [alunoA!, instrutorA]
+for pessoa in listaDePessoas {
+    print ("\(pessoa.nome); \(pessoa.getDescricao)")
+}
+
+// relatorio final 
+let dados = academiaTeste.gerarRelatorio()
+print ("Total de Alunos: \(dados.totalAlunos)")
+print ("Total de Instrutores: \(dados.totalInstrutores)")
+print ("Total de Aulas: \(dados.totalAulas)")
+*/
